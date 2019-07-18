@@ -60,7 +60,6 @@ class CustomerAdd extends React.Component {
         this.setState(nextState);
     }
 
-
     addCustomer = () => {
         const url = '/api/customers';
         const formData = new FormData();
