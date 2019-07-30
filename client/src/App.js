@@ -8,7 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
-import CircularProgress from '@material-ui/core/CircularProgress';
+// import CircularProgress from '@material-ui/core/CircularProgress';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -97,7 +97,6 @@ const styles = theme => ({
 });
 
 class App extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -119,7 +118,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.timer = setInterval(this.progress, 20);
+    // this.timer = setInterval(this.progress, 20);
     this.callApi()
       .then(res => this.setState({customers: res}))
       .catch(err => console.log(err));
@@ -131,10 +130,10 @@ class App extends Component {
     return body;
   }
 
-  progress = () => {
-    const { completed } = this.state;
-    this.setState({ completed: completed >= 100 ? 0 : completed + 1 });
-  }
+  // progress = () => {
+  //   const { completed } = this.state;
+  //   this.setState({ completed: completed >= 100 ? 0 : completed + 1 });
+  // }
 
   handleValueChange = (e) => {
     let nextState = {};
@@ -190,8 +189,8 @@ class App extends Component {
           <Table className={classes.table}>
             <TableHead>
               <TableRow>
-                {cellList.map(c => {
-                  return <TableCell className={classes.tableHead}>{c}</TableCell>
+                {cellList.map((c, key) => {
+                  return <TableCell key={key} className={classes.tableHead}>{c}</TableCell>
                 })}
               </TableRow>
             </TableHead>
@@ -201,7 +200,10 @@ class App extends Component {
                 filteredComponents(this.state.customers) :
                 <TableRow>
                   <TableCell colSpan="6" align="center">
-                    <CircularProgress className={classes.progress} variant="determinate" value={this.state.completed} />
+                    {/*
+                    <CircularProgress className={classes.progress} variant="determinate" />
+                    */}
+                    로딩 중...
                   </TableCell>
                 </TableRow>
               }
